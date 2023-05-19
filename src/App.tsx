@@ -1,16 +1,14 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-// import './App.css'
-
-import { PageHeader } from "./Page/PageHeader"
+import { BrowserRouter } from "react-router-dom"
+import { PageHeader } from "./Common/PageHeader"
+import { PageNavigator } from "./PageNavigator"
 
 function App() {
-  return (
-    <>
-      <PageHeader />
-    </>
 
+  return (
+      <BrowserRouter>
+        <PageHeader />
+        <PageNavigator />
+      </BrowserRouter>
   )
 }
 
