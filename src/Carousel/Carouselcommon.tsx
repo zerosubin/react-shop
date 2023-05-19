@@ -2,44 +2,69 @@ import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styled from 'styled-components';
 import { FaArrowRight } from 'react-icons/fa'
+import { Link } from 'react-router-dom';
 
-export const Carouselcommon = () => {
+interface imagesType {
+  index: number,
+  alt: string,
+  url: string,
+  title: string,
+  desc: string
+}
+
+export const Carouselcommon = (_props:imagesType) => {
+  const images = [
+    {
+      index: 1,
+      alt: 'fashion',
+      url: 'https://react-shop-oinochoe.vercel.app/img_shop_fashion.jpeg',
+      title: '물빠진 청바지!',
+      desc: '이제 막 도착한 패션 청바지를 구경해 보세요.'
+    },
+    {
+      index: 2,
+      alt: 'digital',
+      url: 'https://react-shop-oinochoe.vercel.app/img_shop_digital.jpeg',
+      title: '신속한 업무처리!',
+      desc: '다양한 디지털 상품을 둘러보세요.'
+    },
+    {
+      index: 3,
+      alt: 'grocery',
+      url: 'https://react-shop-oinochoe.vercel.app/img_shop_grocery.jpeg',
+      title: '신선한 식품!',
+      desc: '농장 직배송으로 더욱 신선한 식료품을 만나보세요.'
+    }
+  ]
+
   return (
-    <Carousel>
-      <Div>
-        <Img src='https://react-shop-oinochoe.vercel.app/img_shop_fashion.jpeg' alt='fashion' />
-        <Info>
-          <Title>물빠진 청바지!</Title>
-          <Desc>이제 막 도착한 패션 청바지를 구경해 보세요.</Desc>
-          <Enter>
-            <Span>바로가기</Span><FaArrowRight/>
-          </Enter>
-        </Info>
-      </Div>
-      <Div>
-        <Img src='https://react-shop-oinochoe.vercel.app/img_shop_digital.jpeg' alt='digital' />
-        <Info>
-          <Title>신속한 업무처리!</Title>
-          <Desc>다양한 디지털 상품을 둘러보세요.</Desc>
-          <Enter>
-            <Span>바로가기</Span><FaArrowRight/>
-          </Enter>
-        </Info>
-      </Div>
-      <Div>
-        <Img src='https://react-shop-oinochoe.vercel.app/img_shop_grocery.jpeg' alt='grocery' />
-        <Info>
-          <Title>신선한 식품!</Title>
-          <Desc>농장 직배송으로 더욱 신선한 식료품을 만나보세요.</Desc>
-          <Enter>
-            <Span>바로가기</Span><FaArrowRight/>
-          </Enter>
-        </Info>
-      </Div>
-    </Carousel>
-      
+    <Container>
+      <Carousel showArrows={true} showThumbs={false} autoPlay={true} infiniteLoop={true}>
+        {
+          images.map(image => (
+              <Div key={image.index}>
+                <Img src={image.url} alt={image.alt} />
+                <Info>
+                  <Title>{image.title}</Title>
+                  <Desc>{image.desc}</Desc>
+                  <Link to={`/${image.alt}`}>
+                    <Enter>
+                      <Span>바로가기</Span><FaArrowRight/>
+                    </Enter>
+                  </Link>
+                </Info>
+              </Div>
+          ))
+        }
+      </Carousel>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  width: 100%;
+  z-index: -999;
+`
 
 const Div = styled.div`
   position: relative;
@@ -64,13 +89,14 @@ const Info = styled.div`
 // position: absolute;
 
 const Title = styled.h1`
+  letter-spacing: 2px;
   color: #fff;
   margin: 0;
 `
 const Desc = styled.p`
   color: #fff;
 `
-const Enter = styled.a`
+const Enter = styled.div`
   display: flex;
   border: 0;
   border-radius: 10px;

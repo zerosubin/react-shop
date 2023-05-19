@@ -2,8 +2,14 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 import { BiMoon } from 'react-icons/bi'
 import { GrCart } from 'react-icons/gr'
+import { Desktop, Mobile, Tablet } from "../mediaQuery"
+import { BsList } from 'react-icons/bs'
 
-export const PageHeader = () => {
+interface Props {
+	onmodal(): void;
+}
+
+export const PageHeader = ({ onmodal }: Props ) => {
 
   const Darkmode = () => {
     const mode = localStorage.getItem('mode')
@@ -21,45 +27,96 @@ export const PageHeader = () => {
 
   return (
     <Header>
-      <Container>
-        <Title>
-          <Link to="/">React Shop</Link>
-        </Title>
-        <Ul>
-          <Li>
-            <Link to="/fashion">패션</Link>
-          </Li>
-          <Li>
-            <Link to="/accessory">액세서리</Link>
-          </Li>
-          <Li>
-            <Link to="/digital">디지털</Link>
-          </Li>
-        </Ul>
-      </Container>
-      <Container>
-        <Btn onClick={Darkmode}><BiMoon/></Btn>
-        <Input type="type" placeholder="검색"></Input>
+    <Container>
+      <Desktop>
+        <>
+          <Title>
+            <Link to="/">React Shop</Link>
+          </Title>
+          <Ul>
+            <Link to="/fashion">
+              <Li>패션</Li>
+            </Link>
+            <Link to="/accessory">
+              <Li>액세서리</Li>
+            </Link>
+            <Link to="/digital">
+              <Li>디지털</Li>
+            </Link>
+          </Ul>
+        </>
+      </Desktop>
+      <Tablet>
+        <>
+          <Btnmedia onClick={onmodal}> 
+            <BsList/>
+          </Btnmedia>
+          <Title>
+            <Link to="/">React Shop</Link>
+          </Title>
+          <Ul>
+            <Link to="/fashion">
+              <Li>패션</Li>
+            </Link>
+            <Link to="/accessory">
+              <Li>액세서리</Li>
+            </Link>
+            <Link to="/digital">
+              <Li>디지털</Li>
+            </Link>
+          </Ul>
+        </>
+      </Tablet>
+      <Mobile>
+        <>
+          <Btnmedia onClick={onmodal}>
+            <BsList/>
+          </Btnmedia>
+          <Title>
+              <Link to="/">React Shop</Link>
+          </Title>
+        </>
+      </Mobile>
+    </Container>
+    <Container>
+      <Btn onClick={Darkmode}><BiMoon/></Btn>
+      <Input type="type" placeholder="검색"></Input>
+      <Link to="/cart">
         <Btnhover><GrCart/><CartNum>0</CartNum></Btnhover>
-      </Container>
-    </Header>
+      </Link>
+    </Container>
+  </Header>
   )
 }
+
 
 const Container = styled.div`
   display: flex;
   align-items: center;
 `
+
+const Btnmedia = styled.button`
+  background-color: #fff;
+  height: 38px;
+  border: 0;
+  font-size: 28px;
+  padding: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color : #D1D5DB;
+    border-radius: 10px;
+  }
+`
+
 const Header = styled.nav`
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  padding: 10px 20px;
+  padding: 10px;
   heigth: 64px;
 `
 
 const Title = styled.h1`
-  margin: 0;
+  margin: 0 0 0 5px;
   font-size: 24px;
   color: #374151;
   font-family: var(--font-nanumfont);
@@ -107,6 +164,7 @@ const Btnhover = styled.button`
   height: 48px;
   padding: 10px;
   cursor: pointer;
+  z-index: 9999;
   &:hover {
     background-color : #D1D5DB;
     border-radius: 10px;

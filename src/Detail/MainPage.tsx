@@ -2,6 +2,6 @@ import { Carouselcommon } from "../Carousel/Carouselcommon"
 
 export const MainPage = () => {
   return (
-    <Carouselcommon />
+    <Carouselcommon index={0} alt={""} url={""} title={""} desc={""} />
   )
 }
