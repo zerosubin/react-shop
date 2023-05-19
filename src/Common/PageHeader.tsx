@@ -48,14 +48,13 @@ export const PageHeader = () => {
 
 const Container = styled.div`
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 `
 const Header = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 18px;
-  margin-bottom: 16px;
+  padding: 10px 20px;
   heigth: 64px;
 `
 
@@ -74,14 +73,18 @@ const Ul = styled.ul`
 `
 
 const Li = styled.li`
-  margin-left: 5px;
-  margin-rigth: 10px;
   font-family: var(--font-nanumfont);
+  padding: 8px 16px;
+  &:hover {
+    background-color : #D1D5DB;
+    border-radius: 10px;
+  }
 `
 
 const Input = styled.input`
   padding: 15px;
   background: #D1D5DB;
+  margin: 0 8px;
   border: 0;
   border-radius: 5px;
   outline: none;
@@ -92,8 +95,7 @@ const Btn = styled.button`
   height: 48px;
   border: 0;
   font-size: 28px;
-  margin: 3px 10px 0 10px;
-  padding: 5px 5px 2px 5px;
+  padding: 10px;
   cursor: pointer;
 `
 
@@ -103,8 +105,7 @@ const Btnhover = styled.button`
   border: 0;
   font-size: 28px;
   height: 48px;
-  margin-left: 10px;
-  padding: 5px 8px 2px 8px;
+  padding: 10px;
   cursor: pointer;
   &:hover {
     background-color : #D1D5DB;

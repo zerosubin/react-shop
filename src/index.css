@@ -1,6 +1,6 @@
 @font-face {
 	font-family: "nanumfont";
-	src: url(./assets/fonts/NanumSquare_acB.ttf);
+	src: url(./assets/fonts/NanumSquare_acR.ttf);
 
 }
 
@@ -16,5 +16,11 @@ body {
 a {
   color: inherit;
   text-decoration: none;
-  margin-right: 15px;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
