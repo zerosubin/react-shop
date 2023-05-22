@@ -1,7 +1,20 @@
+
+import { JeweleryCardList } from "./JeweleryCardList"
+import { DigitalCardList } from "./DigitalCardList"
+import { FashionCardList } from "./FashionCardList"
+
+
 export const CardList = () => {
+
   return (
-    <div>
-      list
-    </div>
+    <>
+      <FashionCardList />
+      <JeweleryCardList />
+      <DigitalCardList />
+    </>
+    
+
   )
 }
+
+

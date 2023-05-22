@@ -11,6 +11,6 @@ export const Tablet = ({children}: {children: JSX.Element}): JSX.Element | null 
 }
 
 export const Mobile = ({children}: {children: JSX.Element}): JSX.Element | null => {
-  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   return isMobile ? children : null;
 }

@@ -5,6 +5,8 @@ import { AccessoryPage } from "./Detail/AccessoryPage"
 import { MainPage } from "./Detail/MainPage"
 import { ErrorPage } from "./Detail/ErrorPage"
 import { CartPage } from "./Detail/CartPage"
+import { ProductDetailPage } from "./Detail/ProductDetailPage"
+
 
 
 export const PageNavigator = () => {
@@ -17,6 +19,7 @@ export const PageNavigator = () => {
         <Route path="/digital" element={<DigitalPage />}></Route>
         <Route path="/grocery" element={<ErrorPage />}></Route>
         <Route path="/cart" element={<CartPage />}></Route>
+        <Route path="/product/*" element={<ProductDetailPage />}></Route>
       </Routes>
     </>
   )

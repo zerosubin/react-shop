@@ -62,6 +62,7 @@ export const Carouselcommon = (_props:imagesType) => {
 }
 
 const Container = styled.div`
+  margin-top: 68px;
   width: 100%;
   z-index: -999;
 `

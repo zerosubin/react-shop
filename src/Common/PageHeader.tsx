@@ -26,69 +26,77 @@ export const PageHeader = ({ onmodal }: Props ) => {
   }
 
   return (
-    <Header>
-    <Container>
-      <Desktop>
-        <>
-          <Title>
-            <Link to="/">React Shop</Link>
-          </Title>
-          <Ul>
-            <Link to="/fashion">
-              <Li>패션</Li>
-            </Link>
-            <Link to="/accessory">
-              <Li>액세서리</Li>
-            </Link>
-            <Link to="/digital">
-              <Li>디지털</Li>
-            </Link>
-          </Ul>
-        </>
-      </Desktop>
-      <Tablet>
-        <>
-          <Btnmedia onClick={onmodal}> 
-            <BsList/>
-          </Btnmedia>
-          <Title>
-            <Link to="/">React Shop</Link>
-          </Title>
-          <Ul>
-            <Link to="/fashion">
-              <Li>패션</Li>
-            </Link>
-            <Link to="/accessory">
-              <Li>액세서리</Li>
-            </Link>
-            <Link to="/digital">
-              <Li>디지털</Li>
-            </Link>
-          </Ul>
-        </>
-      </Tablet>
-      <Mobile>
-        <>
-          <Btnmedia onClick={onmodal}>
-            <BsList/>
-          </Btnmedia>
-          <Title>
-              <Link to="/">React Shop</Link>
-          </Title>
-        </>
-      </Mobile>
-    </Container>
-    <Container>
-      <Btn onClick={Darkmode}><BiMoon/></Btn>
-      <Input type="type" placeholder="검색"></Input>
-      <Link to="/cart">
-        <Btnhover><GrCart/><CartNum>0</CartNum></Btnhover>
-      </Link>
-    </Container>
-  </Header>
+    <DIV>
+      <Header>
+        <Container>
+          <Desktop>
+            <>
+              <Title>
+                <Link to="/">React Shop</Link>
+              </Title>
+              <Ul>
+                <Link to="/fashion">
+                  <Li>패션</Li>
+                </Link>
+                <Link to="/accessory">
+                  <Li>액세서리</Li>
+                </Link>
+                <Link to="/digital">
+                  <Li>디지털</Li>
+                </Link>
+              </Ul>
+            </>
+          </Desktop>
+          <Tablet>
+            <>
+              <Btnmedia onClick={onmodal}> 
+                <BsList/>
+              </Btnmedia>
+              <Title>
+                <Link to="/">React Shop</Link>
+              </Title>
+              <Ul>
+                <Link to="/fashion">
+                  <Li>패션</Li>
+                </Link>
+                <Link to="/accessory">
+                  <Li>액세서리</Li>
+                </Link>
+                <Link to="/digital">
+                  <Li>디지털</Li>
+                </Link>
+              </Ul>
+            </>
+          </Tablet>
+          <Mobile>
+            <>
+              <Btnmedia onClick={onmodal}>
+                <BsList/>
+              </Btnmedia>
+              <Title>
+                  <Link to="/">React Shop</Link>
+              </Title>
+            </>
+          </Mobile>
+        </Container>
+        <Container>
+          <Btn onClick={Darkmode}><BiMoon/></Btn>
+          <Input type="type" placeholder="검색"></Input>
+          <Link to="/cart">
+            <Btnhover><GrCart/><CartNum>0</CartNum></Btnhover>
+          </Link>
+        </Container>
+      </Header>
+    </DIV>
   )
 }
 
+const DIV = styled.div`
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  z-index: 9999;
+`
 
 const Container = styled.div`
   display: flex;
@@ -111,8 +119,10 @@ const Btnmedia = styled.button`
 const Header = styled.nav`
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 10px 30px;
   heigth: 64px;
+  background-color : #fff;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / .1);
 `
 
 const Title = styled.h1`

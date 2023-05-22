@@ -1,7 +1,7 @@
+import { Sectioninfo } from "../Common/Sectioninfo"
+
 export const CartPage = () => {
   return (
-    <div>
-      CartPage
-    </div>
+    <Sectioninfo title="홈" name="장바구니" />
   )
 }

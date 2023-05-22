@@ -4,6 +4,7 @@ import { PageNavigator } from "./PageNavigator"
 import { useState, useCallback } from 'react'
 import { Modal } from './Common/Modal'
 import styled from "styled-components"
+import { Footer } from "./Common/Footer"
 
 function App() {
   
@@ -35,6 +36,7 @@ function App() {
       )}
         <PageHeader onmodal={onClickToggleModal} />
         <PageNavigator />
+        <Footer />
       </BrowserRouter>
     </>
   )

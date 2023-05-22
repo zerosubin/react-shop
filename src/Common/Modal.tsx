@@ -1,5 +1,5 @@
 import { styled } from "styled-components"
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, useEffect } from 'react'
 
 interface ModalDefaultType {
   onClickToggleModal: () => void
@@ -9,6 +9,20 @@ export const Modal = ({
   onClickToggleModal,
   children,
 }: PropsWithChildren<ModalDefaultType>)  => {
+
+  useEffect(() => {
+    document.body.style.cssText = `
+      position: fixed; 
+      top: 0;
+      overflow-y: scroll;
+      width: 100%;`;
+    return () => {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = "";
+      window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
+    };
+  }, [])
+
   return (
     <>
       <DialogBox>{children}</DialogBox>
@@ -25,12 +39,6 @@ export const Modal = ({
   )
 }
 
-// const ModalContainer = styled.div`
-//   width: 0;
-//   height: 0;
-//   display: flex;
-//   z-index: 10000;
-// `
 
 const DialogBox = styled.dialog`
   width: 300px;
@@ -43,13 +51,17 @@ const DialogBox = styled.dialog`
   background-color: white;
   border: 0;
   z-index: 10001;
-`;
+
+  top: 0;
+`
 
 const Backdrop = styled.div`
   position: fixed;
   top: 0;
-  width: 100vw;
+  overflow-y: auto;
+  width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 10000;
-`;
+  overflow: hidden;
+`
