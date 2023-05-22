@@ -18,7 +18,7 @@ export const Footer = () => {
           <FooterImg src="\src\assets\amex.png" />
           <FooterImg src="\src\assets\paypal.png" />
           <FooterImg src="\src\assets\diners.png" />
-          <FooterImg src="src\assets\github.png" />
+          <FooterImg src=".\src\assets\github.png" />
         </FooterURL>
         <Sns>
           <a href="https://ko-kr.facebook.com/" target="_blank">
