@@ -123,11 +123,13 @@ export const CartPage = ( ) => {
                 <Bytitle>정말로 구매하시겠습니까?</Bytitle>
                 <Bydesc>장바구니의 모든 상품들이 삭제됩니다.</Bydesc>
                 <ByBtncon>
-                  <ByYESbutn onClick={() => {
-                    onClickToggleModal()
-                    onclear()
-                    location.replace("/cart")
-                  }}>네</ByYESbutn> 
+                  <Link to="/cart">
+                    <ByYESbutn onClick={() => {
+                      onClickToggleModal()
+                      onclear()
+                      location.replace("/cart")
+                    }}>네</ByYESbutn> 
+                  </Link>
                   <ByNObutn onClick={onClickToggleModal}>아니오</ByNObutn>
                 </ByBtncon>
               </ByModal>
@@ -158,11 +160,13 @@ export const CartPage = ( ) => {
               <Bytitle>정말로 구매하시겠습니까?</Bytitle>
               <Bydesc>장바구니의 모든 상품들이 삭제됩니다.</Bydesc>
               <ByBtncon>
-                <ByYESbutn onClick={() => {
-                  onClickToggleModal()
-                  onclear()
-                  location.replace("/cart")
-                }}>네</ByYESbutn> 
+                  <Link to="/cart">
+                    <ByYESbutn onClick={() => {
+                      onClickToggleModal()
+                      onclear()
+                      location.replace("/cart")
+                    }}>네</ByYESbutn> 
+                  </Link>
                 <ByNObutn onClick={onClickToggleModal}>아니오</ByNObutn>
               </ByBtncon>
             </ByModal>
