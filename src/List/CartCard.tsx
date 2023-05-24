@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { Desktop, Mobile, Tablet } from "../mediaQuery"
-import { Cartsmallbtn } from "./Cartsmallbtn"
+// import { Cartsmallbtn } from "./Cartsmallbtn"
 import { Link } from "react-router-dom"
 
 interface ArrayLikeType {
