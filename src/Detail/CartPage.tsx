@@ -126,7 +126,7 @@ export const CartPage = ( ) => {
                   <ByYESbutn onClick={() => {
                     onClickToggleModal()
                     onclear()
-                    window.location.replace("/cart")
+                    location.replace("/cart")
                   }}>네</ByYESbutn> 
                   <ByNObutn onClick={onClickToggleModal}>아니오</ByNObutn>
                 </ByBtncon>
@@ -161,7 +161,7 @@ export const CartPage = ( ) => {
                 <ByYESbutn onClick={() => {
                   onClickToggleModal()
                   onclear()
-                  window.location.replace("/cart")
+                  location.replace("/cart")
                 }}>네</ByYESbutn> 
                 <ByNObutn onClick={onClickToggleModal}>아니오</ByNObutn>
               </ByBtncon>
