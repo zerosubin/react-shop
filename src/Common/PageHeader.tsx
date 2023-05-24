@@ -1,12 +1,25 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import { BiMoon } from 'react-icons/bi'
-import { GrCart } from 'react-icons/gr'
+// import { GrCart } from 'react-icons/gr'
 import { Desktop, Mobile, Tablet } from "../mediaQuery"
 import { BsList } from 'react-icons/bs'
+// import { useState } from "react"
+// import { CartTotal } from "./CartTotal"
+import { GrCart } from "react-icons/gr"
+//import { useState } from "react"
+// import { useEffect } from "react"
 
 interface Props {
-	onmodal(): void;
+	onmodal(): void
+}
+
+interface ArrayLikeType {
+  [key: number]: string
+}
+
+interface CountArrayLikeType {
+  [key: string]: string
 }
 
 export const PageHeader = ({ onmodal }: Props ) => {
@@ -24,6 +37,27 @@ export const PageHeader = ({ onmodal }: Props ) => {
     }
     return mode
   }
+
+  // const [total, setTotal] = useState(0)
+
+  const NumberPuls = () => {
+    var output = localStorage.getItem("CartList")
+    let myarr = JSON.parse(output)
+    console.log(myarr)
+    let total = 0
+
+    const obj: ArrayLikeType = Object(myarr)
+    for(var key in myarr){
+      const selected = obj[Number(key)]
+      let ob: CountArrayLikeType = Object(selected)
+      let count = "count"
+      total += Number(ob[count])
+    }
+    console.log(total)
+    return total
+  }
+
+  NumberPuls()
 
   return (
     <DIV>
@@ -83,13 +117,15 @@ export const PageHeader = ({ onmodal }: Props ) => {
           <Btn onClick={Darkmode}><BiMoon/></Btn>
           <Input type="type" placeholder="검색"></Input>
           <Link to="/cart">
-            <Btnhover><GrCart/><CartNum>0</CartNum></Btnhover>
+            {/* <CartTotal /> */}
+            <Btnhover><GrCart/><CartNum>{NumberPuls()}</CartNum></Btnhover>
           </Link>
         </Container>
       </Header>
     </DIV>
   )
 }
+
 
 const DIV = styled.div`
   width: 100%;

@@ -6,6 +6,8 @@ import { Modal } from './Common/Modal'
 import styled from "styled-components"
 import { Footer } from "./Common/Footer"
 
+import { RecoilRoot } from "recoil"
+
 function App() {
   
   const [isOpenModal, setOpenModal] = useState<boolean>(false)
@@ -15,8 +17,8 @@ function App() {
   }, [isOpenModal])
 
   return (
-    <>
-    <BrowserRouter>
+    <RecoilRoot>
+      <BrowserRouter>
       {isOpenModal && (
           <Modal onClickToggleModal={onClickToggleModal}>
             <ModalTitle>
@@ -34,11 +36,11 @@ function App() {
             </ModalTitle>
           </Modal>
       )}
-        <PageHeader onmodal={onClickToggleModal} />
+        <PageHeader onmodal={onClickToggleModal}/>
         <PageNavigator />
         <Footer />
       </BrowserRouter>
-    </>
+    </RecoilRoot>
   )
 }
 
