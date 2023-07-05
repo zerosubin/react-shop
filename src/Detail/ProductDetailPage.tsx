@@ -88,6 +88,7 @@ export const ProductDetailPage = () => {
       alert('이미 장바구니에 있습니다!')
     } else {
       setCartItem((prev)=>[...prev, productdetail])
+      alert('장바구니에 담았습니다!')
     }
   }
 
