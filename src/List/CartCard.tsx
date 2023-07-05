@@ -1,31 +1,17 @@
 import styled from "styled-components"
 import { Desktop, Mobile, Tablet } from "../mediaQuery"
-// import { Cartsmallbtn } from "./Cartsmallbtn"
 import { Link } from "react-router-dom"
+import { AiFillDelete } from "react-icons/ai"
+import { useSetRecoilState } from "recoil"
+import { CartitemAtom } from "../recoil/CartitemAtom"
 
-interface ArrayLikeType {
-  [key: number]: string
-}
 
-interface CountArrayLikeType {
-  [key: string]: string
-}
-
-export const CartCard = (props:any) => {
-
-  var output = localStorage.getItem("CartList")
-  let myarr = JSON.parse(output)
-  let total = []
-
-  const obj: ArrayLikeType = Object(myarr)
-  for(var key in myarr){
-    const selected = obj[Number(key)]
-    let ob: CountArrayLikeType = Object(selected)
-    let count = "count"
-    total.push(ob[count])
+export const CartCard = (props: any) => {
+  const setItem = useSetRecoilState(CartitemAtom)
+  const removecart = () => {
+    setItem((prev:any)=>prev.filter((e:any)=>e.id!==props.id))
+    alert('장바구니에서 삭제 되었습니다')
   }
-
-  console.log(total)
 
   const realprice = Math.ceil(props.price)
 
@@ -46,11 +32,9 @@ export const CartCard = (props:any) => {
                 <Title>{props.title}</Title>
               </Link>
               <Price>${realprice}</Price>
-              <Btns>
-                <Prevbtn>-</Prevbtn>
-                <Pbtn>{props.cartnum}</Pbtn>
-                <Nextbtn>+</Nextbtn>
-              </Btns>
+              <Btn onClick={removecart}>
+                <AiFillDelete size='32'/>
+              </Btn>
             </Info>
           </Product>
           </Con>
@@ -64,20 +48,9 @@ export const CartCard = (props:any) => {
             <Info>
               <Title>{props.title}</Title>
               <Price>${realprice}</Price>
-              {/* {
-                total.map((product, index) => {
-                  return (
-                    <Cartsmallbtn key={`${index}`}
-                    cartnum={product}
-                     />
-                  )
-                })
-              } */}
-              <Btns>
-                <Prevbtn>-</Prevbtn>
-                <Pbtn>{props.cartnum}</Pbtn>
-                <Nextbtn>+</Nextbtn>
-              </Btns>
+              <Btn onClick={removecart}>
+                <AiFillDelete size='32'/>
+              </Btn>
             </Info>
           </TableProduct>
           </Con>
@@ -91,20 +64,9 @@ export const CartCard = (props:any) => {
             <Info>
               <Title>{props.title}</Title>
               <Price>${realprice}</Price>
-              {/* {
-                total.map((product, index) => {
-                  return (
-                    <Cartsmallbtn key={`${index}`}
-                    cartnum={product}
-                     />
-                  )
-                })
-              } */}
-              <Btns>
-                <Prevbtn>-</Prevbtn>
-                <Pbtn>{props.cartnum}</Pbtn>
-                <Nextbtn>+</Nextbtn>
-              </Btns>
+              <Btn onClick={removecart}>
+              <AiFillDelete size='32'/>
+              </Btn>
             </Info>
           </TableProduct>       
           </Con>   
@@ -120,6 +82,7 @@ const Con = styled.div`
 
 const Product = styled.div`
   display: flex;
+  align-items: center;
 `
 const TableProduct = styled.div`
   display: flex;
@@ -140,12 +103,12 @@ const Img = styled.img`
 const Info = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: 1.2rem;
   padding: 50px;
 `
 
 const Title = styled.h2`
-  margin: 0;
+  margin: 14px 0;
 `
 
 const Price = styled.p`
@@ -153,40 +116,6 @@ const Price = styled.p`
   margin: 0;
 `
 
-const Btns = styled.div`
-  display: flex;
-  align-items: baseline;
-
-`
-const Prevbtn = styled.button`
-  background-color: #570df8;
-  border: 1px solid #570df8;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  padding: 16px;
-  font-size: 18px;
-  color: #fff;
+const Btn = styled.div`
   cursor: pointer;
-  &:hover {
-    background-color: #30078a;
-  }
-`
-
-const Pbtn = styled.p`
-  margin: 0;
-  padding: 16px;
-  font-size: 18px;
-`
-const Nextbtn = styled.button`
-  background-color: #570df8;
-  border: 1px solid #570df8;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  padding: 16px;
-  font-size: 18px;
-  color: #fff;
-  cursor: pointer;
-  &:hover {
-    background-color: #30078a;
-  }
 `

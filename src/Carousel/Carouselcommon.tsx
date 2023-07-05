@@ -85,10 +85,6 @@ const Info = styled.div`
   max-height: 140px;
   max-width: 1025px;
 `
-
-// position: relative;
-// position: absolute;
-
 const Title = styled.h1`
   letter-spacing: 2px;
   color: #fff;

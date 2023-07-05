@@ -1,7 +1,5 @@
 import axios from "axios"
 
-// const remote = axios.create()
-
 export interface ProductsListType {
   data: {
     category: string,
@@ -16,14 +14,6 @@ export interface ProductsListType {
     title: string
   }[]
 }
-
-// export const fashionfetchProducts = async () => {
-//   const fashionListUrl = 'https://fakestoreapi.com/products'
-
-//   const reponse = await axios.get<ProductsListType, any>(fashionListUrl)
-
-//   return reponse
-// }
 
 export const fashionfetchProducts = async () => {
   const fashionListUrl = 'https://fakestoreapi.com/products?limit=4'

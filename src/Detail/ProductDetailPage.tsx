@@ -4,6 +4,8 @@ import { Link, useLocation } from "react-router-dom"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Desktop, Mobile, Tablet } from "../mediaQuery"
+import { useRecoilState } from "recoil"
+import { CartitemAtom } from "../recoil/CartitemAtom"
 
 interface ProductDeatilType {
   category: string,
@@ -23,19 +25,14 @@ interface RatingstarType {
   count: number,
 }
 
-interface ArrayLikeType {
-  [key: number]: string
-}
-
-interface CountArrayLikeType {
-  [key: string]: string
-}
-
 export const ProductDetailPage = () => {
+
+  const [cartItem, setCartItem] = useRecoilState(CartitemAtom)
+
   const location = useLocation()
   const str = location.pathname
   const re =  /[^0-9]/g
-  var result = str.replace(re, "")
+  const result = str.replace(re, "")
 
   const ProductDeatilfetch = async () => {
     const remote = axios.create()
@@ -79,88 +76,22 @@ export const ProductDetailPage = () => {
     })()
   }, [])
 
-  
-  const [countup, setCountup] = useState({})
-  const [num, setNum] = useState(1)
 
   const Starnum = Ratingstar.rate
   const Percentwidth = (Starnum / 5) * 100 - 8
 
+  const isAlreadyInCart = cartItem.findIndex((e) => e.id === productdetail.id)!==-1
+  console.log(cartItem)
 
-  const GetProducts = () => {
-    var output = localStorage.getItem("CartList")
-    let myarr = JSON.parse(output)
-
-    const productID = productdetail.id
-    let count = 1
-    const mycart = {
-      id: Number(`${productID}`),
-      count: Number(`${count}`)
-    }
-    const cart = JSON.stringify(mycart)
-    var PROID = String(productID)
-    const mylist = {
-      [PROID] : JSON.parse(`${cart}`)
-    }
-
-    const lastList = {...myarr, ...mylist}
-
-    if(myarr !== null) {
-      // 현재 가지고 있는 거 lastList
-      // 추가 안 된 거 myarr
-      // 지금 누른 거 mylist
-      setCountup(
-        {...myarr, ...mylist, ...countup}
-      )
-      const lastList = {...myarr, ...mylist, ...countup}
-
-      console.log('로컬존재함')
-
-      const totalList = JSON.stringify(lastList)
-      localStorage.setItem("CartList", totalList)
-
-      if(!myarr.hasOwnProperty([PROID])) {
-        console.log('없어서 추가햇어용')
-      } else {
-        console.log('똑같은거잇어요')
-
-        setCountup(
-          {...myarr, ...mylist}
-        )
-
-        const initid = myarr[PROID].id
-        const obj: ArrayLikeType = countup
-        const selected = obj[initid]
-
-        let ob: CountArrayLikeType = Object(selected)
-        let count = "count"
-        let countNUM = ob[count]
-
-        setNum(num + 1)
-        countNUM += num
-        Object(selected).count = countNUM
-
-        localStorage.setItem("CartList", JSON.stringify(countup))
-      }
+  const AddToCart = () => {
+    if(isAlreadyInCart) {
+      alert('이미 장바구니에 있습니다!')
     } else {
-      const totalList = JSON.stringify(lastList)
-      localStorage.setItem("CartList", totalList)
-      setCountup(
-        {...lastList}
-      )
-      console.log('처음누름!!')
+      setCartItem((prev)=>[...prev, productdetail])
     }
   }
 
-  // const [cartpuls, setCartpuls] = useState(1)
-
-
-  // const NumberPuls = () => {
-  //   setCartpuls(cartpuls + 1)
-  //   console.log(cartpuls)
-  // }
-
-  let originalprice = Math.ceil(productdetail.price)
+  const originalprice = Math.ceil(productdetail.price)
 
 
   return (
@@ -206,7 +137,7 @@ export const ProductDetailPage = () => {
               <Price>${originalprice}</Price>
               <Btns>
               <CartGet onClick={() => {
-                GetProducts()
+                AddToCart()
                 }}>장바구니에 담기</CartGet>
                 <Link to="/cart">
                   <CartGo>장바구니로 이동</CartGo>
@@ -256,7 +187,7 @@ export const ProductDetailPage = () => {
               <Price>${productdetail.price}</Price>
               <Btns>
               <CartGet onClick={() => {
-                GetProducts()
+                AddToCart()
                 }}>장바구니에 담기</CartGet>
                 <Link to="/cart">
                   <CartGo>장바구니로 이동</CartGo>
@@ -306,7 +237,7 @@ export const ProductDetailPage = () => {
               <Price>${productdetail.price}</Price>
               <Btns>
               <CartGet onClick={() => {
-                GetProducts()
+                AddToCart()
                 }}>장바구니에 담기</CartGet>
                 <Link to="/cart">
                   <CartGo>장바구니로 이동</CartGo>

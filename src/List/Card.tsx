@@ -1,8 +1,6 @@
 import { styled } from "styled-components"
 import { Desktop, Mobile, Tablet } from "../mediaQuery"
 import { Link } from "react-router-dom"
-// import { useEffect, useState } from "react"
-// import { fetchProducts } from "../Service/productService"
 
 interface ProductCardProps {
   title: string,

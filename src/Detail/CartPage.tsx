@@ -1,34 +1,34 @@
 import { styled } from "styled-components"
 import { Sectioninfo } from "../Common/Sectioninfo"
 import { Link } from "react-router-dom"
-import { useState, useCallback, useEffect } from "react"
+import { useState, useCallback } from "react"
 import { ByModal } from "../Common/ByModal"
-import axios from "axios"
 import { CartCard } from "../List/CartCard"
+import { useRecoilState, useSetRecoilState } from "recoil"
+import { CartitemAtom } from "../recoil/CartitemAtom"
 
-interface Cartfetch {
-  category: string,
-  description: string,
-  id: number,
-  image: string,
-  price: number,
-  rating: {
-    rate: number,
-    count: number
-  }[],
-  title: string
-}
-
-interface ArrayLikeType {
-  [key: number]: string
-}
-
-interface CountArrayLikeType {
-  [key: string]: string
-}
 
 
 export const CartPage = ( ) => {
+  const allList = []
+
+  // 값만 불러오기
+  const cartItem = useRecoilState(CartitemAtom)
+  console.log(cartItem)
+  console.log(cartItem[0].length)
+  console.log(cartItem[0])
+
+  cartItem[0].map((pro) => {
+    allList.push(pro.id)
+  })
+
+
+  const set = new Set(cartItem[0])
+  // 중복제거한 리스트
+  const totaldisplayList = [...set]
+
+  console.log(totaldisplayList)
+
 
   const [isOpenModal, setOpenModal] = useState<boolean>(false)
 
@@ -36,73 +36,21 @@ export const CartPage = ( ) => {
     setOpenModal(!isOpenModal)
   }, [isOpenModal])
 
-  var output = localStorage.getItem("CartList")
-  let myarr = JSON.parse(output)
-  const keysId = Object.keys(myarr)
-
-  const allList = []
-
-  for(const key in keysId) {
-    // console.log(keysId[key])
-    const result = keysId[key]
-    const Cartfetch = async () => {
-    const remote = axios.create()
-    const url = await remote.get<Cartfetch, any>(`https://fakestoreapi.com/products/${result}`)
-    return url.data
-    }
-
-    const [cartproduct, setCartproduct] = useState<Cartfetch>({
-      category: '',
-      description: '',
-      id: 0,
-      image: '',
-      price: 0,
-      rating: [],
-      title: ''
-    })
-
-    useEffect(() => {
-      (async () => {
-        const cartproduct = await Cartfetch()
-        setCartproduct(cartproduct)
-      })()
-    }, [])
-
-    allList.push(cartproduct)
-  }
-
-
-  let total = []
-
-  const obj: ArrayLikeType = Object(myarr)
-  for(var key in myarr){
-    const selected = obj[Number(key)]
-    let ob: CountArrayLikeType = Object(selected)
-    let count = "count"
-    total.push(ob[count])
-  }
-
   let totalprice = 0
-  allList.map((product, _index) => {
+  totaldisplayList.map((product, _) => {
     totalprice += Math.ceil(product.price)
-    
   })
 
+  const setItem = useSetRecoilState(CartitemAtom)
   const onclear = () => {
-    localStorage.removeItem("CartList")
-    localStorage.setItem("CartList", JSON.stringify({}))
-    
+    setItem([])
   }
-
-  console.log(myarr)
-  const nums = Object.keys(myarr).length
-  console.log(nums)
 
   return (
     <>
     <Sectioninfo title="홈" name="장바구니" />
     <Section>
-      {nums === 0 ? 
+      {cartItem[0].length === 0 ? 
         <>
           <Container>
             <Ment>
@@ -143,7 +91,7 @@ export const CartPage = ( ) => {
         <>
         <Container>
             {
-              allList.map((product, index) => {
+              totaldisplayList.map((product, index) => {
                   return (
                     <CartCard key={`${product.title}_${index}`} image={product.image}
                       title={product.title} id={product.id} price={product.price} cartnum={product.id} />
@@ -164,7 +112,6 @@ export const CartPage = ( ) => {
                     <ByYESbutn onClick={() => {
                       onClickToggleModal()
                       onclear()
-                      location.replace("/cart")
                     }}>네</ByYESbutn> 
                   </Link>
                 <ByNObutn onClick={onClickToggleModal}>아니오</ByNObutn>
@@ -280,26 +227,3 @@ const ByNObutn = styled.button`
     transition: all 0.2s ease-in-out;
   }
 `
-
-// const Product = styled.div`
-// `
-// const Imgcon = styled.div`
-// `
-// const Img = styled.img`
-// `
-// const Info = styled.div`
-// `
-
-// const Title = styled.h2`
-// `
-
-// const Price = styled.p`
-// `
-
-// const Btns = styled.div`
-// `
-
-// const Prevbtn = styled.button`
-// `
-// const Nextbtn = styled.button`
-// `
